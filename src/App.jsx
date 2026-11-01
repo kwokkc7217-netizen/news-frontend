@@ -8,7 +8,9 @@ function App() {
   const [error, setError] = useState('')
 
   useEffect(() => {
-    fetch('/api/news')
+    const API_URL = import.meta.env.VITE_API_URL
+  
+    fetch(`${API_URL}/api/news`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error: ${response.status}`)
