@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://articles-ckmo.onrender.com/sitemap.xml
+Sitemap: https://articles-f7vq.onrender.com/sitemap.xml

@@ -252,12 +252,6 @@ export default function App() {
         )}
       </section>
 
-      <footer className="site-footer">
-        <p>
-          Curated daily by an AI editor — every pick is read and verified before
-          it lands here.
-        </p>
-      </footer>
     </main>
   )
 }
