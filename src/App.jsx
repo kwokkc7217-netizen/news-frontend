@@ -29,11 +29,14 @@ function todayLine() {
   })
 }
 
+const PAGE_SIZE = 10
+
 export default function App() {
   const [news, setNews] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [filter, setFilter] = useState('ALL')
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     const API_URL = import.meta.env.VITE_API_URL
@@ -70,6 +73,40 @@ export default function App() {
     return sorted.filter((item) => item.category?.code === filter)
   }, [sorted, filter])
 
+  const totalPages = Math.max(1, Math.ceil(visible.length / PAGE_SIZE))
+  const safePage = Math.min(page, totalPages)
+  const paged = visible.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE)
+
+  function pickFilter(code) {
+    setFilter(code)
+    setPage(1)
+  }
+
+  function goToPage(p) {
+    const next = Math.min(Math.max(1, p), totalPages)
+    setPage(next)
+    document
+      .querySelector('.section-head')
+      ?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  // compact page numbers: 1 … window … last
+  const pageNumbers = useMemo(() => {
+    const pages = []
+    for (let i = 1; i <= totalPages; i++) {
+      if (
+        i === 1 ||
+        i === totalPages ||
+        Math.abs(i - safePage) <= 2
+      ) {
+        pages.push(i)
+      } else if (pages[pages.length - 1] !== '…') {
+        pages.push('…')
+      }
+    }
+    return pages
+  }, [totalPages, safePage])
+
   return (
     <main className="container">
       <header className="site-header">
@@ -85,9 +122,11 @@ export default function App() {
       <section>
         <div className="section-head">
           <h2>Latest picks</h2>
-          {!loading && !error && (
+          {!loading && !error && visible.length > 0 && (
             <p className="count">
-              {visible.length} {visible.length === 1 ? 'article' : 'articles'}
+              Showing {(safePage - 1) * PAGE_SIZE + 1}–
+              {Math.min(safePage * PAGE_SIZE, visible.length)} of{' '}
+              {visible.length}
             </p>
           )}
         </div>
@@ -96,7 +135,7 @@ export default function App() {
           <div className="filters" role="tablist" aria-label="Filter by category">
             <button
               className={filter === 'ALL' ? 'pill active' : 'pill'}
-              onClick={() => setFilter('ALL')}
+              onClick={() => pickFilter('ALL')}
             >
               All
             </button>
@@ -104,7 +143,7 @@ export default function App() {
               <button
                 key={code}
                 className={filter === code ? 'pill active' : 'pill'}
-                onClick={() => setFilter(code)}
+                onClick={() => pickFilter(code)}
                 style={
                   filter === code
                     ? {
@@ -133,7 +172,7 @@ export default function App() {
         )}
 
         <div className="news-list">
-          {visible.map((item) => {
+          {paged.map((item) => {
             const code = item.category?.code
             const meta = CATEGORY_META[code]
             return (
@@ -177,6 +216,40 @@ export default function App() {
             )
           })}
         </div>
+
+        {!loading && !error && totalPages > 1 && (
+          <nav className="pagination" aria-label="Pages">
+            <button
+              className="page-btn"
+              disabled={safePage === 1}
+              onClick={() => goToPage(safePage - 1)}
+            >
+              ← Prev
+            </button>
+            {pageNumbers.map((p, i) =>
+              p === '…' ? (
+                <span key={`gap-${i}`} className="page-gap">
+                  …
+                </span>
+              ) : (
+                <button
+                  key={p}
+                  className={p === safePage ? 'page-btn current' : 'page-btn'}
+                  onClick={() => goToPage(p)}
+                >
+                  {p}
+                </button>
+              ),
+            )}
+            <button
+              className="page-btn"
+              disabled={safePage === totalPages}
+              onClick={() => goToPage(safePage + 1)}
+            >
+              Next →
+            </button>
+          </nav>
+        )}
       </section>
 
       <footer className="site-footer">

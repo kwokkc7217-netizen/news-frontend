@@ -218,6 +218,51 @@ body {
   font-weight: 700;
 }
 
+/* ---------- pagination ---------- */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+
+.page-btn {
+  min-width: 40px;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: 1px solid #cbd5e1;
+  background: white;
+  color: #475569;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  border-color: #1d4ed8;
+  color: #1d4ed8;
+}
+
+.page-btn.current {
+  background: #1e293b;
+  border-color: #1e293b;
+  color: white;
+}
+
+.page-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.page-gap {
+  color: #94a3b8;
+  padding: 0 4px;
+}
+
 /* ---------- states & footer ---------- */
 
 .state {
