@@ -49,7 +49,15 @@ function App() {
           {news.map((item) => (
             <article className="news-card" key={item.id}>
               <p className="source">{item.source || 'News'}</p>
-              <h3>{item.title}</h3>
+              <h3>
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {item.title}
+                </a>
+              </h3>
               <p className="summary">{item.summary}</p>
               <p className="date">
                 {item.publishedAt
