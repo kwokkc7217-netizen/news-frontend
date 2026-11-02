@@ -108,7 +108,20 @@ export default function App() {
   }, [totalPages, safePage])
 
   return (
-    <main className="container">
+    <>
+      <div className="topbar">
+        <div className="topbar-inner">
+          <span className="topbar-brand">📰 每日一篇</span>
+          <a
+            href="https://hk-daily-places.onrender.com/"
+            target="_blank"
+            rel="noopener"
+          >
+            每日香港好去處 →
+          </a>
+        </div>
+      </div>
+      <main className="container">
       <header className="site-header">
         <p className="eyebrow">Your daily briefing</p>
         <h1>Newsroom</h1>
@@ -252,6 +265,7 @@ export default function App() {
         )}
       </section>
 
-    </main>
+      </main>
+    </>
   )
 }

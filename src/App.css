@@ -17,6 +17,40 @@ body {
   padding: 48px 0 32px;
 }
 
+/* ---------- top bar (matches hk-daily-places) ---------- */
+
+.topbar {
+  background: #14532d;
+  color: #fff;
+}
+
+.topbar-inner {
+  width: min(920px, 92%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-family: "Noto Sans TC", "PingFang HK", "Microsoft JhengHei", system-ui,
+    sans-serif;
+}
+
+.topbar-brand {
+  font-weight: 700;
+  font-size: 1.05em;
+}
+
+.topbar a {
+  color: #d1fae5;
+  text-decoration: none;
+  font-size: 0.95em;
+}
+
+.topbar a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+
 /* ---------- header ---------- */
 
 .site-header {
