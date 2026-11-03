@@ -2,13 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <script>
-      // Legacy Render domain -> owned domain (Render free tier cold-starts too slowly
-      // as a public entry point). Inert on articles.hkdailyplaces.win.
-      if (location.hostname === 'articles-f7vq.onrender.com') {
-        location.replace('https://articles.hkdailyplaces.win' + location.pathname + location.search + location.hash);
-      }
-    </script>
     <link rel="icon" type="image/png" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="oCNz2EhszGAICA7NkP9zbCwJBvzLSqNJ56Nzc86qCRg" />
