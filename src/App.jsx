@@ -113,7 +113,7 @@ export default function App() {
         <div className="topbar-inner">
           <span className="topbar-brand">📰 每日一篇</span>
           <a
-            href="https://hk-daily-places.onrender.com/"
+            href="https://hkdailyplaces.win/"
             target="_blank"
             rel="noopener"
           >
