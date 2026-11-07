@@ -114,8 +114,6 @@ export default function App() {
           <span className="topbar-brand">📰 每日一篇</span>
           <a
             href="https://hkdailyplaces.win/"
-            target="_blank"
-            rel="noopener"
           >
             每日香港好去處 →
           </a>
